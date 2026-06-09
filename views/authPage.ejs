@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= content === "login" ? "Login" : "Register" %></title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <script src="/js/index.js" defer></script>
+  </head>
+  <body>
+    <div class="loginPageContainer">
+      <% if (content === "login") { %> <%- include('./partials/forms/loginForm')
+      %> <% } else{ %> <%- include('./partials/forms/registerForm') %> <% } %>
+    </div>
+  </body>
+</html>
