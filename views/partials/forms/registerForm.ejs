@@ -1,0 +1,33 @@
+<div class="regFormContainer formContainer">
+  <p class="formTitle">Register</p>
+  <form action="/register" method="POST">
+    <div class="regFormNameInputContainer">
+      <div class="inputContainer">
+        <label for="firstName">First Name:</label>
+        <input type="text" name="firstName" id="firstName" />
+      </div>
+      <div class="inputContainer">
+        <label for="lastName">Last Name:</label>
+        <input type="text" name="lastName" id="lastName" />
+      </div>
+    </div>
+
+    <div class="inputContainer">
+      <label for="username">Username:</label>
+      <input type="text" name="username" id="username" />
+    </div>
+
+    <div class="inputContainer">
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password" />
+    </div>
+
+    <div class="inputContainer">
+      <label for="rePassword">Re-enter the password:</label>
+      <input type="password" name="rePassword" id="rePassword" />
+    </div>
+
+    <button type="submit">Register</button>
+  </form>
+  <p class="formActText">Already registered? <a href="/login">Login</a></p>
+</div>
