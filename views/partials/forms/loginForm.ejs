@@ -1,0 +1,36 @@
+<div class="loginFormContainer formContainer">
+  <p class="formTitle">Login</p>
+  <% if (errorMessages.length > 0) { %>
+  <div class="formErrorMessageContainer">
+    <p class="formErrorMessage"><%= errorMessages %></p>
+  </div>
+  <% } %>
+  <form action="/login" method="POST">
+    <div class="inputContainer">
+      <label for="username">Username:</label>
+      <input type="text" name="username" id="username" />
+
+      <div class="formValidationErrorContainer">
+        <div class="formValidationError">
+          <img src="./icons/check.svg" alt="" class="formValidationIcon" />
+          <p class="formValidationErrorMessage">Contain one number</p>
+        </div>
+
+        <div class="formValidationError">
+          <img src="./icons/close.svg" alt="" class="formValidationIcon" />
+          <p class="formValidationErrorMessage">Contain one lowercase letter</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="inputContainer">
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password" />
+    </div>
+
+    <button type="submit">Login</button>
+  </form>
+  <p class="formActText">
+    No account? <a href="/register">Register for free!</a>
+  </p>
+</div>
