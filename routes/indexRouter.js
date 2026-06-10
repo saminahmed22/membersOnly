@@ -3,6 +3,8 @@ const indexRouter = Router();
 
 const passport = require("passport");
 
+const { validationResult } = require("express-validator");
+
 // Controllers
 const indexController = require("../controllers/indexController");
 const uesrLoginController = require("../controllers/uesrLoginController");
@@ -10,14 +12,14 @@ const userRegisterController = require("../controllers/userRegisterController");
 
 // middlewares
 const validatePassword = require("../middlewares/validatePassword");
-const middlewares = require("../middlewares/isAuthenticated");
+const { isAuthenticated } = require("../middlewares/isAuthenticated");
+const { validateLoginForm } = require("../middlewares/loginFormValidator");
+const {
+  validateRegisterForm,
+} = require("../middlewares/registerFormValidator");
 
 // Routes
-indexRouter.get(
-  "/",
-  middlewares.isAuthenticated,
-  indexController.renderAllPosts,
-);
+indexRouter.get("/", isAuthenticated, indexController.renderAllPosts);
 
 // Login routes
 
@@ -25,22 +27,41 @@ indexRouter.get("/login", uesrLoginController.renderLoginPage);
 
 indexRouter.post(
   "/login",
+  validateLoginForm,
+  (req, res, next) => {
+    const formValidationErrors = validationResult(req);
+
+    if (!formValidationErrors.isEmpty()) {
+      return uesrLoginController.renderLoginPage(req, res, next);
+    }
+
+    next();
+  },
+
   passport.authenticate("local", {
     failureFlash: true,
-    successRedirect: "/login-success",
-    failureRedirect: "/login-failure",
+    successRedirect: "/",
+    failureRedirect: "/login",
   }),
 );
-
-indexRouter.get("/login-success", (req, res) => {
-  res.redirect("/");
-});
-indexRouter.get("/login-failure", indexController.denyEntry);
 
 indexRouter.get("/logout", uesrLoginController.logOut);
 
 // Register routes
 indexRouter.get("/register", userRegisterController.renderRegisterPage);
-indexRouter.post("/register", userRegisterController.registerUser);
+indexRouter.post(
+  "/register",
+  validateRegisterForm,
+  (req, res, next) => {
+    const formValidationErrors = validationResult(req);
+
+    if (!formValidationErrors.isEmpty()) {
+      return userRegisterController.renderRegisterPage(req, res, next);
+    }
+
+    next();
+  },
+  userRegisterController.registerUser,
+);
 
 module.exports = indexRouter;
