@@ -11,7 +11,6 @@ const uesrLoginController = require("../controllers/uesrLoginController");
 const userRegisterController = require("../controllers/userRegisterController");
 
 // middlewares
-const validatePassword = require("../middlewares/validatePassword");
 const { isAuthenticated } = require("../middlewares/isAuthenticated");
 const { validateLoginForm } = require("../middlewares/loginFormValidator");
 const {
@@ -23,7 +22,13 @@ indexRouter.get("/", isAuthenticated, indexController.renderAllPosts);
 
 // Login routes
 
-indexRouter.get("/login", uesrLoginController.renderLoginPage);
+indexRouter.get(
+  "/login",
+  (req, res, next) => {
+    req.isAuthenticated() ? res.redirect("/") : next();
+  },
+  uesrLoginController.renderLoginPage,
+);
 
 indexRouter.post(
   "/login",
@@ -48,7 +53,13 @@ indexRouter.post(
 indexRouter.get("/logout", uesrLoginController.logOut);
 
 // Register routes
-indexRouter.get("/register", userRegisterController.renderRegisterPage);
+indexRouter.get(
+  "/register",
+  (req, res, next) => {
+    req.isAuthenticated() ? res.redirect("/") : next();
+  },
+  userRegisterController.renderRegisterPage,
+);
 indexRouter.post(
   "/register",
   validateRegisterForm,
