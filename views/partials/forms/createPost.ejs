@@ -1,0 +1,33 @@
+<div
+  class="createPostFormContainer formContainer"
+  id="CreatePostPopover"
+  popover
+>
+  <div class="formHeader">
+    <p class="formTitle">Create a post</p>
+    <button class="popoverCloseBtn">
+      <img src="./icons/close.svg" alt="Close icon" />
+    </button>
+  </div>
+  <form action="/creatPost" method="POST">
+    <div class="inputContainer">
+      <label for="title">Title:</label>
+      <input
+        aria-label="title"
+        type="text"
+        name="title"
+        id="title"
+        placeholder='Cat&apos;s should be called the "owner"'
+      />
+    </div>
+    <div class="inputContainer">
+      <label for="description">Description:</label>
+      <textarea
+        aria-label="description"
+        name="description"
+        id="description"
+      ></textarea>
+    </div>
+    <button type="submit">Create</button>
+  </form>
+</div>
