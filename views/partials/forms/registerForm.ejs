@@ -1,30 +1,78 @@
+<% const invalidFieldsList = [] %>
+<% if (formValidationErrorMessages.length > 0) { %> <%
+formValidationErrorMessages.forEach(message => { %>
+<% invalidFieldsList.push(message.path) %>
+<% }) %>
+<% } %>
+
 <div class="regFormContainer formContainer">
   <p class="formTitle">Register</p>
-  <form action="/register" method="POST">
+  <form class="regFrom" action="/register" method="POST">
     <div class="regFormNameInputContainer">
       <div class="inputContainer">
         <label for="firstName">First Name:</label>
-        <input type="text" name="firstName" id="firstName" />
+        <input
+          type="text"
+          name="firstName"
+          id="firstName"
+          value="<%= values.firstName %>"
+          placeholder=" "
+          class="<% if (invalidFieldsList.includes('firstName')) { %> invalidField <% } else { %> validField <% } %>"
+        />
+
+        <%- include('./formErrorMessage', {target: "firstName"}) %>
       </div>
       <div class="inputContainer">
         <label for="lastName">Last Name:</label>
-        <input type="text" name="lastName" id="lastName" />
+        <input
+          type="text"
+          name="lastName"
+          id="lastName"
+          value="<%= values.lastName %>"
+          placeholder=""
+          class="<% if (invalidFieldsList.includes('lastName')) { %> invalidField <% } else { %> validField <% } %>"
+        />
+        <%- include('./formErrorMessage', {target: "lastName"}) %>
       </div>
     </div>
 
     <div class="inputContainer">
       <label for="username">Username:</label>
-      <input type="text" name="username" id="username" />
+      <input
+        type="text"
+        name="username"
+        id="username"
+        value="<%= values.username %>"
+        placeholder=""
+        class="<% if (invalidFieldsList.includes('username')) { %> invalidField <% } else { %> validField <% } %>"
+      />
+      <%- include('./formErrorMessage', {target: "username"}) %>
     </div>
 
     <div class="inputContainer">
       <label for="password">Password:</label>
-      <input type="password" name="password" id="password" />
+      <input
+        type="password"
+        name="password"
+        id="password"
+        value="<%= values.password %>"
+        placeholder=""
+        class="<% if (invalidFieldsList.includes('password')) { %> invalidField <% } else { %> validField <% } %>"
+      />
+      <%- include('./formErrorMessage', {target: "password"}) %>
     </div>
 
     <div class="inputContainer">
       <label for="rePassword">Re-enter the password:</label>
-      <input type="password" name="rePassword" id="rePassword" />
+      <input
+        type="password"
+        name="rePassword"
+        id="rePassword"
+        value="<%= values.rePassword %>"
+        placeholder=""
+        class="<% if (invalidFieldsList.includes('rePassword')) { %> invalidField <% } else { %> validField <% } %>"
+      />
+      <%- include('./formErrorMessage', {target: "rePassword"}) %>
     </div>
 
     <button type="submit">Register</button>
