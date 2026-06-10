@@ -10,7 +10,7 @@ async function verifyCallback(username, password, done) {
     const user = await db.findUserByUsername(username);
 
     if (!user) {
-      return done(null, false, { message: "No account was found" });
+      return done(null, false, { message: "No account was found." });
     }
 
     const isValid = await passwordUtils.validatePassword(password, user.hash);
@@ -18,7 +18,7 @@ async function verifyCallback(username, password, done) {
     if (isValid) {
       return done(null, user);
     } else {
-      return done(null, false, { message: "Incorrect password." });
+      return done(null, false, { message: "Incorrect username or password." });
     }
   } catch (error) {
     return done(error, { message: "An error occured." });
