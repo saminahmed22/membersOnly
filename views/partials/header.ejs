@@ -1,6 +1,13 @@
 <header>
   <p class="pageTitle"><a class="pageTitleLink" href="/">Opawnion</a></p>
   <nav class="navTag">
+    <button class="createBtn" popovertarget="CreatePostPopover">
+      <img src="./icons/add.svg" alt="Add icon" />
+      Create a post
+    </button>
+
+    <%- include('./forms/createPost') %>
+
     <button class="profileButton" popovertarget="profileMenu">
       <img
         class="profileButtonImg"
