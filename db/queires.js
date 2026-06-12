@@ -55,7 +55,7 @@ async function deletePost(post_id) {
 
 async function fetchAllPosts() {
   const { rows } = await pool.query(
-    "SELECT post_id, user_id, post_title, post_description, TO_CHAR(created_at, 'FMDay, FMMonth DD, YYYY') AS created_at, category, first_name, last_name, username, profile_picture, isadmin FROM members_only_posts JOIN members_only_users USING (user_id) ORDER BY members_only_posts.created_at DESC",
+    "SELECT post_id, user_id, post_title, post_description, TO_CHAR(created_at, 'FMDay, FMMonth DD, YYYY') AS created_at, category, first_name, last_name, username, profile_picture, isadmin, status FROM members_only_posts JOIN members_only_users USING (user_id) ORDER BY members_only_posts.created_at DESC",
   );
 
   return rows;
@@ -63,7 +63,7 @@ async function fetchAllPosts() {
 
 async function fetchAllPostsWithoutSecrets() {
   const { rows } = await pool.query(
-    "SELECT post_id, user_id, post_title, post_description, TO_CHAR(created_at, 'FMDay, FMMonth DD, YYYY') AS created_at, category, first_name, last_name, username, profile_picture, isadmin FROM members_only_posts JOIN members_only_users USING (user_id) WHERE category <> 'secret' ORDER BY members_only_posts.created_at DESC",
+    "SELECT post_id, user_id, post_title, post_description, TO_CHAR(created_at, 'FMDay, FMMonth DD, YYYY') AS created_at, category, first_name, last_name, username, profile_picture, isadmin, status FROM members_only_posts JOIN members_only_users USING (user_id) WHERE category <> 'secret' ORDER BY members_only_posts.created_at DESC",
   );
 
   return rows;
@@ -71,7 +71,7 @@ async function fetchAllPostsWithoutSecrets() {
 
 async function findUserPostsByID(userId) {
   const { rows } = await pool.query(
-    "SELECT post_id, user_id, post_title, post_description, TO_CHAR(created_at, 'FMDay, FMMonth DD, YYYY') AS created_at, category, first_name, last_name, username, profile_picture, isadmin FROM members_only_posts JOIN members_only_users USING (user_id) WHERE members_only_posts.user_id = $1 ORDER BY members_only_posts.created_at DESC",
+    "SELECT post_id, user_id, post_title, post_description, TO_CHAR(created_at, 'FMDay, FMMonth DD, YYYY') AS created_at, category, first_name, last_name, username, profile_picture, isadmin, status FROM members_only_posts JOIN members_only_users USING (user_id) WHERE members_only_posts.user_id = $1 ORDER BY members_only_posts.created_at DESC",
     [userId],
   );
   return rows;
@@ -79,7 +79,7 @@ async function findUserPostsByID(userId) {
 
 async function findUserPostsByIDWithoutSecret(userId) {
   const { rows } = await pool.query(
-    "SELECT post_id, user_id, post_title, post_description, TO_CHAR(created_at, 'FMDay, FMMonth DD, YYYY') AS created_at, category, first_name, last_name, username, profile_picture, isadmin FROM members_only_posts JOIN members_only_users USING (user_id) WHERE members_only_posts.user_id = $1 AND category <> 'secret' ORDER BY members_only_posts.created_at DESC",
+    "SELECT post_id, user_id, post_title, post_description, TO_CHAR(created_at, 'FMDay, FMMonth DD, YYYY') AS created_at, category, first_name, last_name, username, profile_picture, isadmin, status FROM members_only_posts JOIN members_only_users USING (user_id) WHERE members_only_posts.user_id = $1 AND category <> 'secret' ORDER BY members_only_posts.created_at DESC",
     [userId],
   );
   return rows;
