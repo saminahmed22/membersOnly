@@ -1,0 +1,747 @@
+@font-face {
+  font-family: quicksand;
+  src: url(/fonts/Quicksand-VariableFont_wght.ttf);
+}
+
+:root {
+  interpolate-size: allow-keywords;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+
+  background-color: rgb(36, 36, 36);
+
+  font-family: quicksand;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  overflow: hidden;
+}
+
+header {
+  height: 70px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: rgb(24, 24, 24);
+
+  flex-shrink: 0;
+}
+
+::-webkit-scrollbar {
+  width: 0.2rem;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(107, 107, 107);
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(168, 167, 167);
+  cursor: grab;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: rgb(207, 207, 207);
+  cursor: grabbing;
+}
+
+.pageTitle {
+  padding-left: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.secretButton {
+  background-color: transparent;
+  border: none;
+}
+
+.secretModal {
+  height: 100%;
+  width: 100%;
+
+  background-color: transparent;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  top: 0;
+  z-index: 100;
+
+  margin: auto auto;
+
+  border: none;
+  border-radius: 20px;
+}
+.secretModal:open {
+  display: flex;
+}
+
+.secretModal::backdrop {
+  background-color: rgba(0, 0, 0, 0.37) !important;
+}
+
+.secretButtonIcon {
+  height: 40px;
+
+  animation:
+    colorChange 9s infinite alternate,
+    tilt 10s infinite;
+
+  filter: drop-shadow(0 0 0.75rem white);
+}
+
+.secretMessageContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.secretIcon {
+  height: 50px;
+  width: 50px;
+}
+
+.secretMessage {
+  color: white;
+
+  font-weight: 500;
+}
+
+.secretHint {
+  color: rgb(245, 209, 209);
+  max-width: 320px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.secretInputContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.secretSubmitButton:hover {
+  color: crimson;
+}
+
+@keyframes colorChange {
+  0% {
+    fill: white;
+  }
+  12% {
+    fill: cream;
+  }
+  25% {
+    fill: orange;
+  }
+  37% {
+    fill: #e2a96f;
+  } /* ginger */
+  50% {
+    fill: #8b4513;
+  } /* brown */
+  62% {
+    fill: #808080;
+  } /* gray */
+  75% {
+    fill: #c0c0c0;
+  } /* silver */
+  87% {
+    fill: #3b3b3b;
+  } /* dark charcoal */
+  100% {
+    fill: black;
+  }
+}
+
+@keyframes tilt {
+  0%,
+  80% {
+    transform: rotate(0deg);
+  } /* still for 8s */
+  90% {
+    transform: rotate(15deg);
+  } /* tilt over 1s */
+  100% {
+    transform: rotate(0deg);
+  } /* return over 1s */
+}
+
+.navTag {
+  height: 100%;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+}
+
+.createBtn {
+  height: 45px;
+  width: fit-content;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
+  border: 1px solid black;
+  border-radius: 20px;
+
+  padding: 5px 10px;
+
+  transition: background-color 0.3s ease;
+}
+
+.createBtn:hover {
+  background-color: orange;
+}
+
+.formHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+#createPostPopoverModal {
+  margin: auto auto;
+  background-color: transparent;
+
+  height: 100%;
+  width: 100%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  z-index: 100;
+  border: none;
+}
+
+#createPostPopoverModal:open {
+  display: flex;
+}
+
+#createPostPopoverModal::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modalCloseBtn,
+.secretCloseBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  filter: invert(1);
+  border: none;
+}
+
+#CreatePostPopover {
+  display: flex;
+  margin: auto auto;
+
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+#title {
+  color: white;
+  background-color: rgb(58 58 58 / 55%);
+}
+#description {
+  height: 50px;
+  color: white;
+  background-color: rgb(58 58 58 / 55%);
+  resize: vertical;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+button {
+  cursor: pointer;
+}
+
+.profileButton {
+  anchor-name: --profileButton;
+}
+
+#profileMenu {
+  position: absolute;
+  position-anchor: profileButton;
+  position-area: bottom center;
+}
+
+#profileMenu:popover-open {
+  min-width: 100px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 5px;
+
+  background-color: rgb(39, 39, 39);
+}
+
+#profileMenu a {
+  height: 20px;
+  width: 90%;
+
+  padding: 5px;
+}
+
+#profileMenu a:hover {
+  background-color: rgba(255, 255, 255, 0.258);
+}
+
+.profileButton,
+.profileButtonImg {
+  height: 40px;
+  width: 40px;
+
+  background-color: transparent;
+
+  border: none;
+  border-radius: 100%;
+}
+
+.profileButtonImg {
+  object-fit: cover;
+}
+
+/* login page */
+
+.loginPageContainer {
+  min-height: 100%;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 50px;
+}
+
+/* Forms */
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formContainer {
+  min-height: fit-content;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  gap: 25px;
+
+  background-color: rgba(0, 0, 0);
+
+  border-radius: 20px;
+
+  padding: 20px;
+
+  transition: height 0.3s ease;
+}
+
+.formTitle {
+  color: white;
+
+  font-size: 1.7rem;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.secretCheckboxContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+}
+
+.secretCheckbox {
+  width: auto !important;
+}
+
+/* .inputContainer input {
+  outline: 2px solid red;
+} */
+
+/* .inputContainer input:focus:empty {
+  outline: 10px solid red;
+} */
+
+.inputContainer label {
+  color: white;
+}
+
+.inputContainer input {
+  height: 25px;
+  width: 320px;
+
+  border: none;
+  border-radius: 5px;
+
+  padding-left: 5px;
+}
+
+.regFrom input {
+  transition: outline 0.3s ease;
+}
+
+.regFrom .invalidField {
+  outline: 3px solid red;
+}
+
+.regFrom .validField {
+  outline: 3px solid green;
+}
+
+.regFrom .validField:placeholder-shown {
+  outline: 2px solid white !important;
+}
+
+form button {
+  height: 30px;
+  width: 150px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  align-self: flex-end;
+}
+
+/* Reg form */
+
+.regFormContainer {
+  width: 350px;
+}
+
+.regFormContainer input {
+  width: 100%;
+}
+
+.regFormNameInputContainer {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.regFormNameInputContainer .inputContainer {
+  width: 45%;
+}
+
+.formActText {
+  color: white;
+  align-self: flex-start;
+  font-size: 0.8rem;
+}
+
+.formActText a {
+  text-decoration: underline;
+}
+
+.formErrorMessageContainer {
+  min-height: 50px;
+  background: #ff00001c;
+  width: 90%;
+  border: 1px solid #ff000075;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 10px;
+}
+.formErrorMessage {
+  color: white;
+  font-size: 0.8rem;
+}
+
+.formValidationErrorContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.formValidationError {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.formValidationIcon {
+  height: 20px;
+
+  filter: invert();
+}
+.formValidationErrorMessage {
+  color: red;
+  font-size: 0.8rem;
+}
+
+/* content */
+.contentBody {
+  height: calc(100vh - 150px);
+  width: 100%;
+  flex: 1 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+  padding: 20px 0;
+
+  background-color: rgba(24, 24, 24, 0.4);
+
+  overflow: auto;
+}
+
+.contentBodyAction {
+  height: 100px;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* post */
+
+.postCard {
+  height: fit-content;
+  width: 50%;
+  color: white;
+  background: #292929;
+  padding: 20px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.secretPost {
+  background-color: #000f295e !important;
+}
+
+.secretMemberIcon {
+  height: 20px;
+  width: 20px;
+}
+
+.secretMemberIcon path {
+  fill: white;
+}
+
+.secretMemberIcon:hover path {
+  fill: crimson;
+}
+
+.postCardHeader {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.postCardProfilePictureURL {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.postCardProfilePicture {
+  height: 40px;
+  width: 40px;
+  border-radius: 100%;
+}
+
+.postData {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 5px;
+}
+
+.postCardUsernameContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.postCardUsername {
+  font-size: 1.2rem;
+  color: #dad8d8;
+  transition: color 0.3s ease;
+}
+
+.postCardUsername:hover {
+  color: white;
+}
+
+.adminIcon {
+  height: 20px;
+  transition: fill 0.3s ease;
+}
+
+.adminIcon:hover {
+  fill: orangered;
+}
+
+.postCardDate {
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.postContent {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.postTitle {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.postDesc {
+  font-size: 1.2rem;
+  padding-left: 10px;
+  color: #dddddd;
+}
+
+.deletePostBtn {
+  margin-left: auto;
+  background: transparent;
+  border: none;
+}
+
+.deleteBtnIcon {
+  transition: fill 0.3s ease;
+}
+
+.deleteBtnIcon:hover {
+  fill: crimson;
+}
+
+.deleteBtnIcon:active {
+  fill: red;
+}
+
+/* Profile page */
+.profilePageContaier {
+  width: 100%;
+  flex: 1 0 auto;
+  display: flex;
+
+  background-color: rgba(24, 24, 24, 0.4);
+}
+
+.profilePageSidebar {
+  height: 100%;
+  width: 30%;
+  border-right: 1px solid white;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 50px;
+}
+
+.profilePagePostList {
+  height: 100%;
+  flex: 1 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.profilePagePostList .contentBody {
+  background-color: transparent;
+}
+
+.profilePagePostList .contentBody .postCard:last-child {
+  margin-bottom: 200px;
+}
+
+.profilePagePostList .postCard {
+  width: 80%;
+}
+
+.profilePagePostList .postCard a {
+  pointer-events: none;
+}
+
+.profilePageImage {
+  height: 150px;
+  width: 150px;
+  border-radius: 100%;
+}
+
+.profilePageName {
+  color: white;
+  font-size: 2.5rem;
+  margin: 20px;
+  max-width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.profilePageName .adminIcon {
+  height: 35px;
+  width: 35px;
+}
+
+.profilePagePostListTitle {
+  font-size: 3rem;
+  color: white;
+  margin: 30px;
+}
+
+.profilePageNoPostText {
+  color: white;
+  align-self: center;
+  margin-top: 20%;
+}
