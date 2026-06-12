@@ -8,13 +8,23 @@ async function createUser(data) {
   const username = data.username;
   const hash = await hashPassword(data.password);
 
-  console.log(
-    `Updated data: \n${JSON.stringify({ first_name, last_name, username, hash })}`,
-  );
+  const image = await db.getImage();
+  const profile_picture = image.image_link;
+  await db.updateImageCount(image.image_id); //Update image count
 
-  await db.insertUser(first_name, last_name, username, hash);
+  await db.insertUser(first_name, last_name, username, profile_picture, hash);
 
   return;
 }
 
-module.exports = { createUser };
+async function userData(userId, isMember) {
+  const userdata = await db.findUserByID(userId);
+
+  const postdata = isMember
+    ? await db.findUserPostsByID(userId)
+    : await db.findUserPostsByIDWithoutSecret(userId);
+
+  return { userdata, postdata };
+}
+
+module.exports = { createUser, userData };
