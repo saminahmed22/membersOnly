@@ -1,0 +1,46 @@
+<div class="profilePageContaier">
+  <div class="profilePageSidebar">
+    <img
+      class="profilePageImage"
+      src="<%= posterdata.profile_picture %>"
+      alt=""
+    />
+    <p class="profilePageName">
+      <%= posterdata.first_name + " " + posterdata.last_name %> <% if
+      (posterdata.isadmin) { %>
+
+      <svg
+        class="adminIcon"
+        alt="Admin icon"
+        xmlns="http://www.w3.org/2000/svg"
+        height="24px"
+        viewBox="0 -960 960 960"
+        width="24px"
+        fill="#ffffff"
+      >
+        <title>Admin</title>
+        <path
+          d="M480-80q-139-35-229.5-159.5T160-516v-244l320-120 320 120v244q0 152-90.5 276.5T480-80Zm0-84q104-33 172-132t68-220v-189l-240-90-240 90v189q0 121 68 220t172 132Zm0-316Z"
+        />
+      </svg>
+      <% } %>
+    </p>
+  </div>
+  <div class="profilePagePostList">
+    <p class="profilePagePostListTitle">Posts</p>
+    <div class="contentBody">
+      <% if (postdata.length > 0) { %> <% postdata.forEach(post => { %>
+      <%- include('./partials/postCard', {postData: post}) %>
+      <% }) %>
+      <% } else{%>
+      <% if (userdata.user_id === posterdata.user_id) { %>
+      <p class="profilePageNoPostText">You haven't posted anything yet.</p>
+      <% } else{ %>
+      <p class="profilePageNoPostText">
+        This user haven't posted anything yet.
+      </p>
+      <% } %>
+      <% } %>
+    </div>
+  </div>
+</div>
