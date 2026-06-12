@@ -24,7 +24,6 @@ function renderRegisterPage(req, res) {
 }
 
 async function registerUser(req, res) {
-  console.log(`Request body: ${JSON.stringify(req.body)}`);
   await userModel.createUser(req.body);
 
   res.redirect("/");
